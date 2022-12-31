@@ -1,0 +1,36 @@
+RABBITMQ
+rabbitmq-plugins enable rabbitmq_management : enable etme komutu
+https://rabbitmq.com/management.html
+--başlangıc giriş değerleri rabbitmq paneli: guest, şifre:guest
+
+--kurulumunda sistem ortam değişkenlerine ekleme yapılır.Öncelikle erlang/otp kurulur.
+--Erlang/OTP dilini kullanır.
+--Yaptığı iş Message Queue(kuyruklama) sistemi
+--Yoğun email gönderilen senaryolarda
+--Yoğun bir şekilde veri işlenmesi gereken yerlerde
+--Verilerin önemli olduğu yerlerde
+
+
+--Mesaj kuyruğuna ilk giren ilk çıkar (FIFO=first in first out)
+--Publisher ve consumer kısımlarını biz düzenliyoruz.
+--Publisher veriyi gönderir, consumer veriyi işler. Consumer da önreğin mail kuyruğuyla mail atacak ajandır.
+--Publisher ile consumer arasında rabbit mq vardır. Burda işlemi o yapar.
+--Rabbitmq içerisinde : 
+{
+  routing key: mesajlarımızı ilgili yerlere göndermek için eklediğimiz anahtar kelimeler
+  exchange : routing keyi okur. Örneğin, routing key: email, ozaman email gönderen sunuculara göndrmek için gerekli kuyruklara aktarır.
+  queue : kuyruk anlamına gelir. Consumer'lara verileri teker teker göndermek görevidir.
+  channels : publisher ve consumer arasında oluşan bir kanaldır. İleri ve geri yönlü çalışır. Veri gönderilmesi için publisher-consumera
+  veri gittiğinde ise consumer-publishera bilgi verir.
+  exchange type : 3 çeşit exchange type vardır. Belirli standartlara göre veriyi almayı sağlar.
+     Direct exchange: Routing key belirlenir ve bu bilgi ilgili kuyruğu yazılır. Consumer bu anahtar bilgisine göre işlem yapar.
+     Fanout exchange: Exchange içerisinde yer alan tüm mesajlar tüm kuyruklara göndeirlir. Routing key olanlar ise göz ardı edilir.
+     Topic exchange: Verilen anahtara göre farklı farklı kuyruklara göre yazma işlemini yapar. Ayrıca WildCard desteği bulunur.Örneğin "*" ve "#"
+     ile belirli bir gruba ya da tüm mesajlara erişmek mümkündür.
+ 
+}
+
+--Rabbitmq, .mesajlaşma için amqp protokokünü kullanır
+--1.05.35 rabbitmq veritabanı unacked'in anlamı
+
+ 
